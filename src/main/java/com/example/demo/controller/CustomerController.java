@@ -17,31 +17,27 @@ import com.example.demo.entity.Customer;
 import com.example.demo.service.CustomerService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("http://localhost:3000")
 public class CustomerController {
 	@Autowired 
 	CustomerService cs;
 	@PostMapping("/")
-	public List<Customer> adddetail(@RequestBody List<Customer> c)
+	public Customer post(@RequestBody Customer c)
 	{
-		return cs.postinfo(c);
+		return cs.posting(c);
 	}
+	
 	@GetMapping("/")
 	public List<Customer> showdetail()
 	{
 		return cs.getinfo();
 	}
-	@GetMapping("/id/{id}")
-	public Optional<Customer> showbyid(@PathVariable int id)
-	{
-		return cs.getinfoid(id);
-	}
-	@PutMapping("/put/{n}/{id}")
-	public String update(@PathVariable String  n,@PathVariable int  id) {
-	 	   
-	 			   cs.update(n, id);
-	 			  return "updated";
-	    }
+//	@GetMapping("/id/{id}")
+//	public Optional<Customer> showbyid(@PathVariable int id)
+//	{
+//		return cs.getinfoid(id);
+//	}
+	
 	@PutMapping("/id/{id}")
 	public String modifybyid(@PathVariable int id,@RequestBody Customer ss) {
 		return cs.updateinfoid(id, ss);
@@ -68,4 +64,19 @@ public class CustomerController {
 	 public List<Customer> showpageinfo(@PathVariable int pageno,@PathVariable int pagesize){
 		 return cs.getbypage(pageno, pagesize);
 	 }
+	@GetMapping("get/{id}")
+	public Optional<Customer> gett(@PathVariable int id)
+	{
+		return cs.getId(id);
+	}
+	@GetMapping("sort")
+	public List<Customer> sortt()
+	{
+		return cs.sort();
+	}
+	@GetMapping("page")
+	public List<Customer> pagesort()
+	{
+		return cs.getbypage1();
+	}
 }

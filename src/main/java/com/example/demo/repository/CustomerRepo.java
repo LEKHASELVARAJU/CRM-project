@@ -19,10 +19,10 @@ public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 //	 @Transactional
 //	 @Query(value="update Product set productname=:lekha where prodid=?2",nativeQuery = true)
 //	 public int updateProduct(String  newid,int oldid);
-	@Modifying
-	@Transactional
-	@Query(value="update Product set productname=:newName where prodid=:oldId", nativeQuery = true)
-	public void updateProduct(@Param("newName") String newProductName, @Param("oldId") int oldProductId);
+//	@Modifying
+//	@Transactional
+//	@Query(value="update Customer set productname=:newName where prodid=:oldId", nativeQuery = true)
+//	public void updateProduct(@Param("newName") String newProductName, @Param("oldId") int oldProductId);
 
 	@Modifying
 	 @Transactional

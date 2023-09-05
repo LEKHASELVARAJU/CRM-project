@@ -1,11 +1,13 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
 public class Interaction {
 	@Id
+	@Column(updatable = false, nullable=false)
 	private int interid;
 	private String intertype;
 	private String duedate;

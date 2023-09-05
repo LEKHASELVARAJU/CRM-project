@@ -16,6 +16,10 @@ import com.example.demo.repository.CustomerRepo;
 public class CustomerService {
 	@Autowired
 	CustomerRepo cr;
+	public Customer posting(Customer c)
+	{
+		return cr.save(c);
+	}
 	public List<Customer> postinfo(List<Customer> c)
 	{
 		return (List<Customer>) cr.saveAll(c);
@@ -24,14 +28,11 @@ public class CustomerService {
 	{
 		return (List<Customer>) cr.findAll();
 	}
-	public Optional<Customer> getinfoid(int id)
-	{
-		return (Optional<Customer>) cr.findById(id);
-	}
-	public void update(String id1 ,int id)
-	{
-		 cr.updateProduct(id1,id);
-	}
+//	public Optional<Customer> getinfoid(int id)
+//	{
+//		return (Optional<Customer>) cr.findById(id);
+//	}
+	
 	public String updateinfoid(int id,Customer ss) {
 	   	 cr.saveAndFlush(ss);
 	   	 if(cr.existsById(id)) {
@@ -47,9 +48,23 @@ public class CustomerService {
 	public List<Customer> sortinfo(String s){
 	   	 return cr.findAll(Sort.by(Sort.Direction.DESC,s));
 	    }
+	public List<Customer> sort()
+	{
+		return (List<Customer>)cr.findAll(Sort.by("name").ascending());
+	}
 	public List<Customer> getbypage(int pgno,int pgsize){
 	   	 Page<Customer> p=cr.findAll(PageRequest.of(pgno, pgsize));
 	   	 return p.getContent();
 	   	 }
+	public List<Customer> getbypage1(){
+	   	 Page<Customer> p=cr.findAll(PageRequest.of(3,4,Sort.by("name").descending()));
+	   	 return p.getContent();
+	   	 }
+	//get by id :
+		//---- path variable-----
+		public Optional<Customer> getId(int id)
+		{
+			return cr.findById(id);
+		}
 
 }
