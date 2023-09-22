@@ -9,13 +9,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Buy;
 import com.example.demo.entity.Customer;
+import com.example.demo.repository.BuyRepo;
 import com.example.demo.repository.CustomerRepo;
 
 @Service
 public class CustomerService {
 	@Autowired
 	CustomerRepo cr;
+	@Autowired
+	BuyRepo br;
 	public Customer posting(Customer c)
 	{
 		return cr.save(c);
@@ -27,6 +31,10 @@ public class CustomerService {
 	public List<Customer> getinfo()
 	{
 		return (List<Customer>) cr.findAll();
+	}
+	public List<Buy> getinfob()
+	{
+		return (List<Buy>) br.findAll();
 	}
 //	public Optional<Customer> getinfoid(int id)
 //	{
@@ -60,11 +68,16 @@ public class CustomerService {
 	   	 Page<Customer> p=cr.findAll(PageRequest.of(3,4,Sort.by("name").descending()));
 	   	 return p.getContent();
 	   	 }
+	public Buy postingb(Buy b)
+	{
+		return br.save(b);
+	}
 	//get by id :
 		//---- path variable-----
 		public Optional<Customer> getId(int id)
 		{
 			return cr.findById(id);
 		}
+		
 
 }

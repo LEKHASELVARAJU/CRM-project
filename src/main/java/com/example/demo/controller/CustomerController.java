@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Buy;
 import com.example.demo.entity.Customer;
 import com.example.demo.service.CustomerService;
 
@@ -26,11 +27,21 @@ public class CustomerController {
 	{
 		return cs.posting(c);
 	}
+	@PostMapping("/prod")
+	public Buy postb(@RequestBody Buy b)
+	{
+		return cs.postingb(b);
+	}
 	
 	@GetMapping("/")
 	public List<Customer> showdetail()
 	{
 		return cs.getinfo();
+	}
+	@GetMapping("/getprod")
+	public List<Buy> showdetailb()
+	{
+		return cs.getinfob();
 	}
 //	@GetMapping("/id/{id}")
 //	public Optional<Customer> showbyid(@PathVariable int id)
